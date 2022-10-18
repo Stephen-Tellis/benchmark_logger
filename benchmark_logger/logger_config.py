@@ -3,6 +3,7 @@
 # Python libs
 import logging
 import os
+from pathlib import Path
 
 EXTENSION = ".csv"
 DAT_DUMP_DIR = "benchmark_data"
@@ -11,9 +12,9 @@ DAT_DUMP_DIR = "benchmark_data"
 
 
 def create_datadump_dir():
-    os.chdir(os.path.dirname(__file__))
-    os.chdir("../")
+    os.chdir(str(Path.home()))
     benchmark_dir = os.path.join(os.getcwd(), DAT_DUMP_DIR)
+    Path(benchmark_dir).mkdir(parents=True, exist_ok=True)
     return benchmark_dir
 
 
