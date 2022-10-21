@@ -11,6 +11,8 @@ class Monitor:
     def __init__(self, fname=None) -> None:
         self.logger = setup_logger(__name__, filename=fname)
         self.logger.info("CPUtmp; CPUfreq; CPUusage; RAMusage; Swapusage;")
+        # TODO: Get no of cores and adjust the column names to match
+        # TODO: Service server that sets filename and path
 
     def log_all_stats(self):
         # Get CPU temp
