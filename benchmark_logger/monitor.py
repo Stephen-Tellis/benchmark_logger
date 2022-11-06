@@ -10,9 +10,10 @@ import psutil
 class Monitor:
     def __init__(self, fname=None) -> None:
         self.logger = setup_logger(__name__, filename=fname)
-        self.logger.info("CPUtmp; CPUfreq; CPUusage; RAMusage; Swapusage;")
-        # TODO: Get no of cores and adjust the column names to match
-        # TODO: Service server that sets filename and path
+        numcores = psutil.cpu_count()
+        tempr_col = "CPUtmp; " * numcores
+        freq_col = "CPUfreq; " * numcores
+        self.logger.info(f"{tempr_col}{freq_col}CPUusage; RAMusage; Swapusage;")
 
     def log_all_stats(self):
         # Get CPU temp
@@ -29,6 +30,9 @@ class Monitor:
         # Get RAM usage
         ram_perc = psutil.virtual_memory()[2]
         swap_perc = psutil.swap_memory()[3]
+
+        # Log stats
         self.logger.info(
             f"{temp_cels[1:-1]};{freq_ghz[1:-1]};{cpu_perc[1:-1]};{ram_perc};{swap_perc};"
         )
+

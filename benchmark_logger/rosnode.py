@@ -16,9 +16,9 @@ from std_msgs.msg import Empty
 
 class Subscriber(Node):
     def __init__(self):
-        super().__init__("log_now")
+        super().__init__("benchmark_logger")
         self.log_datasubscription = self.create_subscription(
-            Empty, "benchmark_logger", self._listener_callback, 1
+            Empty, "log_once", self._listener_callback, 1
         )
         curDT = datetime.now()
         self.systemstats = Monitor(fname=curDT.strftime("%m-%d-%Y-%H-%M-%S"))
