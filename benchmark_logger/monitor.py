@@ -15,7 +15,7 @@ class Monitor:
         freq_col = "CPUfreq; " * numcores
         self.logger.info(f"{tempr_col}{freq_col}CPUusage; RAMusage; Swapusage;")
 
-    def log_all_stats(self):
+    def log_all_stats(self, interval= 0.5):
         # Get CPU temp
         temps = psutil.sensors_temperatures()["coretemp"]
         temp_cels = str([cores[1] for cores in temps])
@@ -25,7 +25,7 @@ class Monitor:
         freq_ghz = str([float("{:.2f}".format(cores[0] / 1000)) for cores in freqs])
 
         # Get CPU usage
-        cpu_perc = str(psutil.cpu_percent(interval=0.5, percpu=True))
+        cpu_perc = str(psutil.cpu_percent(interval=interval, percpu=True))
 
         # Get RAM usage
         ram_perc = psutil.virtual_memory()[2]

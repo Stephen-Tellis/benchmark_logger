@@ -28,7 +28,7 @@ def setup_logger(name, filename=None):
     """
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter("""%(message)s""")
+    formatter = logging.Formatter("""%(created)f; %(message)s""")
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(formatter)
     if isinstance(filename, str):
